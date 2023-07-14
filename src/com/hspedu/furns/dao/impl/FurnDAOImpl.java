@@ -12,4 +12,9 @@ public class FurnDAOImpl extends BasicDAO<Furn> implements FurnDAO {
         String sql = "SELECT id,NAME,maker,price,sales,stock,img_path imgPath FROM furn";
         return queryMulti(sql,Furn.class);
     }
+
+    @Override
+    public int addFurn(Furn furn) {
+        return 0;
+    }
 }

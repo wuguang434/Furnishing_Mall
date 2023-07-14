@@ -17,4 +17,7 @@ public class FurnServiceTest {
             System.out.println(furn);
         }
     }
+    public void addFurn(){
+
+    }
 }

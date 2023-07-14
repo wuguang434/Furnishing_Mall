@@ -15,9 +15,14 @@ public abstract class BasicServlet extends HttpServlet {
             //this就是请求的servlet
             //declaredMethid就是当前请求的servlet对应的action名字  的方法
             Method declaredMethod = this.getClass().getDeclaredMethod(action, HttpServletRequest.class, HttpServletResponse.class);
-            declaredMethod.invoke(this,req,resp);
+            declaredMethod.invoke(this, req, resp);
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    @Override
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        doPost(req, resp);
     }
 }
