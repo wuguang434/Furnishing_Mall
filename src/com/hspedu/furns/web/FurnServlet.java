@@ -20,11 +20,27 @@ public class FurnServlet extends BasicServlet {
 
     private FurnService furnService = new FurnServiceImpl();
 
-    protected void del(HttpServletRequest req,HttpServletResponse resp){
-        req.getParameter("?")
+    public void update(HttpServletRequest req, HttpServletResponse resp) throws IOException {
+        Furn furn = DataUtils.copyParamToBean(req.getParameterMap(), new Furn());
+        furnService.updateFurn(furn);
+        resp.sendRedirect(req.getContextPath()+"/manage/furnServlet?action=list");
+    }
+
+    public void showFurn(HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException {
+        int id = DataUtils.parseInt(req.getParameter("id"), 0);
+        Furn furn = furnService.queryFurnById(id);
+        req.setAttribute("furn", furn);
+
+        req.getRequestDispatcher("/views/manage/furn_update.jsp").forward(req, resp);
     }
 
 
+    protected void del(HttpServletRequest req, HttpServletResponse resp) throws IOException {
+        //防止接收的id不为数字的字符串,使用一个工具方法转换
+        int id = DataUtils.parseInt(req.getParameter("id"), 0);
+        furnService.deleteFurnById(id);
+        resp.sendRedirect(req.getContextPath() + "manage/furnServlet?action=list");
+    }
 
     /**
      * 这里使用模板设计模式+反射+动态绑定来调用到list方法

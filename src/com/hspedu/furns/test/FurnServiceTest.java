@@ -24,4 +24,9 @@ public class FurnServiceTest {
     public void deleteFurnById(){
         System.out.println(furnService.deleteFurnById(7));
     }
+    @Test
+    public void queryFurnById(){
+        Furn furn = furnService.queryFurnById(12);
+        System.out.println(furn);
+    }
 }

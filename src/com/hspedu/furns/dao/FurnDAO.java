@@ -6,6 +6,12 @@ import java.util.List;
 
 public interface FurnDAO {
     public List<Furn> queryFurns();
+
     public int addFurn(Furn furn);
+
     public int deleteFurnById(int id);
+
+    public Furn queryFurnById(int id);
+
+    public int updateFurn(Furn furn);
 }

@@ -1,27 +1,16 @@
-<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge"/>
     <title>家居网购</title>
+    <base href="<%=request.getContextPath() + "/"%>">
     <!-- 移动端适配 -->
-    <base href="<%=request.getContextPath()+"/"%>">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
     <link rel="stylesheet" href="assets/css/vendor/vendor.min.css"/>
     <link rel="stylesheet" href="assets/css/plugins/plugins.min.css"/>
     <link rel="stylesheet" href="assets/css/style.min.css">
-    <%--引入jQuery--%>
-    <script type="text/javascript" src="script/jquery-3.6.0.min.js"></script>
-    <script type="text/javascript">
-        $(function () {
-            //绑定点击事件
-            $("a.deleteCss").click(function () {
-                var furnName = $(this).parent().parent().find("td:eq(1)").text();
-         return confirm("你确定要删除["+furnName+"]?");
-            })
-        })
-    </script>
 </head>
 
 <body>
@@ -43,22 +32,13 @@
                 <!-- Header Action Start -->
                 <div class="col align-self-center">
                     <div class="header-actions">
-                        <div class="header_account_list">
-                            <a href="javascript:void(0)" class="header-action-btn search-btn"><i
-                                    class="icon-magnifier"></i></a>
-                            <div class="dropdown_search">
-                                <form class="action-form" action="#">
-                                    <input class="form-control" placeholder="Enter your search key" type="text">
-                                    <button class="submit" type="submit"><i class="icon-magnifier"></i></button>
-                                </form>
-                            </div>
-                        </div>
+
                         <!-- Single Wedge Start -->
                         <div class="header-bottom-set dropdown">
-                            <a href="#">后台管理</a>
+                            <a href="#">家居管理</a>
                         </div>
                         <div class="header-bottom-set dropdown">
-                            <a href="views/manage/furn_add.jsp">添加家居</a>
+                            <a href="#">订单管理</a>
                         </div>
                     </div>
                 </div>
@@ -88,10 +68,15 @@
 <!-- Cart Area Start -->
 <div class="cart-main-area pt-100px pb-100px">
     <div class="container">
-        <h3 class="cart-page-title">家居后台管理</h3>
+        <h3 class="cart-page-title">家居后台管理-修改家居</h3>
         <div class="row">
             <div class="col-lg-12 col-md-12 col-sm-12 col-12">
-                <form action="#">
+                <%--因为是post,所以需要使用到隐藏域id,action--%>
+                <form action="manage/furnServlet" method="post">
+                    <%--传id--%>
+                    <input type="hidden" name="id" value="${requestScope.furn.id}">
+                        <%--确定调用servlet的update方法--%>
+                        <input type="hidden" name="action" value="update">
                     <div class="table-content table-responsive cart-table-content">
                         <table>
                             <thead>
@@ -105,31 +90,27 @@
                                 <th>操作</th>
                             </tr>
                             </thead>
-                            <%--取出furns集合,循环显示--%>
-                            <c:forEach items="${requestScope.furns}" var="furn">
-                                <tr>
-                                    <td class="product-thumbnail">
-                                        <a href="#"><img class="img-responsive ml-3"
-                                                         src="${furn.imgPath}"
-                                                         alt=""/></a>
-                                    </td>
-                                    <td class="product-name"><a href="#">${furn.name}</a></td>
-                                    <td class="product-name"><a href="#">${furn.maker}</a></td>
-                                    <td class="product-price-cart"><span class="amount">${furn.price}</span></td>
-                                    <td class="product-quantity">
-                                            ${furn.sales}
-                                    </td>
-                                    <td class="product-quantity">
-                                            ${furn.stock}
-                                    </td>
-                                    <td class="product-remove">
-                                        <a href="manage/furnServlet?action=showFurn&id=${furn.id}"><i class="icon-pencil"></i></a>
-                                            <%--action决定要去找furnServlet中的哪个方法--%>
-                                        <a class="deleteCss" href="manage/furnServlet?action=del&id=${furn.id}"><i
-                                                class="icon-close"></i></a>
-                                    </td>
-                                </tr>
-                            </c:forEach>
+                            <tbody>
+                            <tr>
+                                <td class="product-thumbnail">
+                                    <a href="#"><img class="img-responsive ml-3" src="assets/images/product-image/default.jpg"
+                                                     alt=""/></a>
+                                </td>
+                                <td class="product-name"><input name="name" style="width: 60%" type="text" value="${requestScope.furn.name}"/></td>
+                                <td class="product-name"><input name="maker" style="width: 90%" type="text" value="${requestScope.furn.maker}"/></td>
+                                <td class="product-price-cart"><input name="price" style="width: 90%" type="text" value="${requestScope.furn.price}"/></td>
+                                <td class="product-quantity">
+                                    <input name="sales" style="width: 90%" type="text" value="${requestScope.furn.sales}"/>
+                                </td>
+                                <td class="product-quantity">
+                                    <input name="stock" style="width: 90%" type="text" value="${requestScope.furn.stock}"/>
+                                </td>
+                                <td>
+<!--                                    <a href="#"><i class="icon-pencil"></i></a>-->
+<!--                                    <a href="#"><i class="icon-close"></i></a>-->
+                                    <input type="submit" style="width: 90%;background-color: silver;border: silver;border-radius: 20%;" value="修改家居"/>
+                                </td>
+                            </tr>
                             </tbody>
                         </table>
                     </div>
@@ -203,7 +184,7 @@
                         </div>
                     </div>
                     <div class="col-md-6 text-left">
-                        <p class="copy-text">Copyright &copy; 2021 教育~</p>
+                        <p class="copy-text">Copyright &copy; 2021 韩顺平教育~</p>
                     </div>
                 </div>
             </div>
