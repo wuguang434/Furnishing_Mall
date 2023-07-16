@@ -9,4 +9,5 @@ public interface FurnService {
 
 
     int addFurn(Furn furn);
+    public int deleteFurnById(int id);
 }

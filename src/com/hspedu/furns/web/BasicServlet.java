@@ -10,6 +10,7 @@ import java.lang.reflect.Method;
 public abstract class BasicServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        req.setCharacterEncoding("utf-8");
         String action = req.getParameter("action");
         try {
             //this就是请求的servlet

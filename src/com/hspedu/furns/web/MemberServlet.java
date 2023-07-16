@@ -11,6 +11,7 @@ import java.io.IOException;
  * @author 12100
  */
 public class MemberServlet extends BasicServlet {
+
     private MemberServiceImpl memberService = new MemberServiceImpl();
 
     @Override

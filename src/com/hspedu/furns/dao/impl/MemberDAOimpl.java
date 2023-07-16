@@ -11,6 +11,7 @@ public class MemberDAOimpl extends BasicDAO<Member> implements MemberDAO {
      * queryMemberByusername和queryMemberByUsername的区别
      * 注意大小写的问题;
      */
+    @Override
     public Member queryMemberByusername(String username) {
         String sql = "SELECT `id`,`username`,`password`,`email` FROM `member` " +
                 " WHERE `username`=?";

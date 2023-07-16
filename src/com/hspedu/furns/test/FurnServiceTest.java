@@ -20,4 +20,8 @@ public class FurnServiceTest {
     public void addFurn(){
 
     }
+    @Test
+    public void deleteFurnById(){
+        System.out.println(furnService.deleteFurnById(7));
+    }
 }

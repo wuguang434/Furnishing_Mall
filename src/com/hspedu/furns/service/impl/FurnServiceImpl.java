@@ -17,6 +17,11 @@ public class FurnServiceImpl implements FurnService {
 
     @Override
     public int addFurn(Furn furn) {
-       return furnDAO.addFurn(furn);
+        return furnDAO.addFurn(furn);
+    }
+
+    @Override
+    public int deleteFurnById(int id) {
+        return furnDAO.deleteFurnById(id);
     }
 }
