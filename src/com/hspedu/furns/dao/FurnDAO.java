@@ -14,4 +14,9 @@ public interface FurnDAO {
     public Furn queryFurnById(int id);
 
     public int updateFurn(Furn furn);
+
+    public int getTotalRow();
+
+    //获取当前页要显示的数据
+    public List<Furn> getPageitems(int begin,int pageSize);
 }

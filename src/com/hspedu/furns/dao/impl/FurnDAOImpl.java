@@ -41,5 +41,17 @@ public class FurnDAOImpl extends BasicDAO<Furn> implements FurnDAO {
                 furn.getPrice(), furn.getSales(), furn.getStock(), furn.getImgPath(), furn.getId());
     }
 
+    @Override
+    public int getTotalRow() {
+        String sql = "SELECT COUNT(*) FROM furn";
+        //number是包装类的父类,向上转型
+        return ((Number) queryScalar(sql)).intValue();
+    }
+
+    @Override
+    public List<Furn> getPageitems(int pageNo, int pageSize) {
+        String sql = "SELECT id,NAME,maker,price,sales,stock,img_path imgPath FROM furn LIMIT ?,?";
+        return queryMulti(sql, Furn.class, pageNo, pageSize);
+    }
 
 }

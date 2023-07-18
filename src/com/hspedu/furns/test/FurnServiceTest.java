@@ -1,6 +1,7 @@
 package com.hspedu.furns.test;
 
 import com.hspedu.furns.entity.Furn;
+import com.hspedu.furns.entity.Page;
 import com.hspedu.furns.service.FurnService;
 import com.hspedu.furns.service.impl.FurnServiceImpl;
 import org.testng.annotations.Test;
@@ -28,5 +29,10 @@ public class FurnServiceTest {
     public void queryFurnById(){
         Furn furn = furnService.queryFurnById(12);
         System.out.println(furn);
+    }
+    @Test
+    public void page(){
+        Page<Furn> page = furnService.page(1, 3);
+        System.out.println(page);
     }
 }
